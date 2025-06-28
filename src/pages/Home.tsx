@@ -6,7 +6,6 @@ import AboutMe from '../sections/AboutMe';
 import Hero from '../sections/Hero';
 import Portfolio from '../sections/Portfolio';
 import Carousel from '../sections/Carousel';
-import Contact from '../sections/Contact';
 import { Button } from '../components';
 
 export type SectionsReferences = {
@@ -23,7 +22,6 @@ export const Home = () => {
     const heroRef = useRef<HTMLElement>(null);
     const aboutMeRef = useRef<HTMLElement>(null);
     const portfolioRef = useRef<HTMLElement>(null);
-    const contactRef = useRef<HTMLElement>(null);
 
     const headerHeight = 96;
 
@@ -52,16 +50,6 @@ export const Home = () => {
             ref: portfolioRef,
             scrollTo: () => {
                 const offset = (portfolioRef.current?.getBoundingClientRect().top ?? 0) - headerHeight;
-                window.scrollTo({
-                    top: offset,
-                    behavior: 'smooth',
-                });
-            },
-        },
-        contactRef: {
-            ref: contactRef,
-            scrollTo: () => {
-                const offset = (contactRef.current?.getBoundingClientRect().top ?? 0) - headerHeight;
                 window.scrollTo({
                     top: offset,
                     behavior: 'smooth',
@@ -102,7 +90,6 @@ export const Home = () => {
                 isLeft={ true }
             />
             <Portfolio reference={ portfolioRef } />
-            <Contact reference={ contactRef } sectionsRef={ sectionsRef } />
 
             { showButton && (
                 <Button

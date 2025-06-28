@@ -37,14 +37,6 @@ const resources = {
             description:
                 'Estos son algunos de los proyectos en los que he trabajado. ¡Explóralos a continuación!',
         },
-        contact: {
-            title: 'Contacto',
-            description: '¡Si tienes alguna pregunta, no dudes en contactarme!',
-            name: 'Nombre',
-            email: 'Correo electrónico',
-            message: 'Mensaje',
-            contact_me: '¡Contáctame!',
-        },
         projects: {
             check_it_out: '¡Míralo aquí!',
             engage360: {
@@ -195,121 +187,115 @@ const resources = {
             description:
                 'These are some of the projects I have worked on. Check them out!',
         },
-        contact: {
-            title: 'Contact',
-            description: 'Feel free to contact me if you have any questions!',
-            name: 'Name',
-            email: 'Email',
-            message: 'Message',
-            contact_me: 'Contact me!',
-        },
         projects: {
-            check_it_out: 'Check this out!',
+            check_it_out: 'Check it out!',
             engage360: {
                 title: 'Engage360',
                 description:
-                    'Enterprise multiplatform solution for management and optimization of organizational processes',
+                    'Enterprise multiplatform for organizational process and operations management and optimization',
                 long_description:
-                    'Enterprise multiplatform solution for management and optimization of organizational processes and operations. I participated as a Full Stack Engineer working with technologies like React, TypeScript, Material UI, GraphQL, Dgraph, and Apollo, contributing to the development of new features for the CRM module and massive email campaigns, and to the maintenance of the platform.',
+                    'Enterprise multiplatform for organizational process and operations management and optimization. I participated as a Full Stack Engineer working with technologies such as React, TypeScript, Material UI, GraphQL, Dgraph and Apollo, contributing to the development of new functionalities for the CRM module and mass email campaign management, and to the maintenance of the platform.',
             },
             easylist: {
                 title: 'EasyList',
                 description:
-                    'Web solution to bid for tenders to supply educational resources to public schools in Costa Rica',
+                    'Bidding system for Costa Rican schools',
                 long_description:
-                    'Web solution to bid for tenders to supply educational resources to public schools in Costa Rica. I have participated as a Tech Lead and Full Stack Developer, working with HTML, CSS, JavaScript, Bootstrap, C#, .NET Core and SQL Server, contributing to the web application development and to the decision-making process of the team in matters related to the design and development of interfaces for the platform. This was a college level project praised by the teachers with a top grade, its first version was launched in the first period of 2023.',
+                    'Bidding system to supply educational resources to public schools in Costa Rica. I participated in the development of the platform as Tech Lead and Full Stack Developer using HTML, CSS, JavaScript, Bootstrap, C#, .NET Core and SQL Server. Additionally, I have contributed to decision-making related to design and interface programming for the platform. It was a university project applauded by the professors and its first version was launched in the first quarter of 2023.',
             },
             cenfotecoKingdoms: {
                 title: 'Cenfoteco Kingdoms',
                 description:
-                    'Medieval role-playing and dice videogame for the UCenfotec community',
+                    'Medieval role-playing and dice game for the UCenfotec community',
                 long_description:
-                    'Medieval role-playing and dice videogame for the UCenfotec community, built with Java and libGDX, applying more than 9 different design patterns. College level project praised by the teacher in charge and presented during the Maker Faire 2023 technology fair. I participated fully in the construction of the game visuals, programming and implementation of the various design patterns used. The game was launched in the first period of 2023.',
+                    'Medieval role-playing and dice game for the UCenfotec community, built with Java and libGDX, applying more than 9 different design patterns. University project applauded by the professor in charge and presented during the Maker Faire 2023 technology fair. I participated fully in the construction of the game visuals, programming and implementation of the various design patterns used. The game was launched in the first quarter of 2023.',
             },
             elViejo: {
                 title: 'Azucarera El Viejo',
                 description:
-                    'Research and development college program for the optimization of sugar production processes in Costa Rica',
+                    'Research and development program for sugar production process optimization in Costa Rica',
                 long_description:
-                    'Research and development college program for the optimization of sugar production processes in Costa Rica by Universidad Cenfotec. I participated as a Full Stack Engineer working with technologies like React, TypeScript, Redux, React Native, and Material UI, contributing to the development of a mobile application to track hourly records. In addition, I helped in the research part of the project, using Wolfram Mathematica to perform calculations and data analysis to optimize production operations.',
+                    'Research and development program for sugar production process optimization in Costa Rica. I participated as a Full Stack Engineer working with technologies such as React, TypeScript, Redux, React Native, and Material UI, for the development of a mobile application for hourly record control. Likewise, I supported the research part of the project, using Wolfram Mathematica to perform calculations and data analysis to optimize production processes.',
             },
             mawi: {
                 title: 'Mawi Managers',
                 description:
-                    'Solution to manage tasks and projects for construction companies and architects',
+                    'Task and project management solution for construction companies and architects',
                 long_description:
-                    'Solution to manage tasks and projects for construction companies and architects. I have participated as a Freelancer Front End Developer, working with React and TypeScript, contributing to the web application development and to the decision-making process of the team in matters related to the design and development of interfaces for the platform. The project is currently in development, and it is expected to be released in the last quarter of 2022.',
+                    'Task and project management solution for construction companies and architects. I have participated in the development of the web application as a Freelancer Front End Developer using React and TypeScript. Additionally, I have contributed to decision-making related to design and interface programming for the platform. The project is under development and its first version will be launched in the last quarter of 2022.',
             },
             staries: {
                 title: 'Staries',
                 description:
-                    'Web application that allows you to create and share your own stories',
+                    'Web application to create and share interactive stories',
                 long_description:
-                    'I worked on this project during my second year of my high school level software development degree, initially using PHP to handle the backend, and then migrating to Node.js with Firebase. I acted as a Product Owner and Developer within the team, which has had several members throughout the time it was developed. Currently, three members of the team are migrating the frontend to React with Typescript. This project consists of a web application that allows young writers and students to share poems, novels, and short stories to get their names out as authors of the current era.',
+                    'I carried out this project during my penultimate year of the technical degree, initially using PHP to handle the backend, and then migrating to Node.js with Firebase. I acted as Product Owner and Developer within the team, which has had several members throughout the time it was developed. Currently, three team members are migrating the frontend to React with TypeScript. This project consists of a web application that allows young writers and students to share poems, novels, stories and short stories to make themselves known as current authors.',
             },
             mobydygSite: {
                 title: 'MobyDyg Site',
-                description: `MobyDyg's official website with internationalization`,
+                description: `Official MobyDyg site with internationalization`,
                 long_description:
-                    'This project consists of the official website of MobyDyg, an e-commerce company that offers technological solutions to small and medium-sized businesses. I worked as an UI/UX Designer and Full Stack Developer, prototyping the site in Figma, and then transferring it to code using Angular and TypeScript. For internationalization, ngx-translate was used, which allows you to change the language without reloading the site.',
+                    'This project consists of the official site of MobyDyg, an e-commerce company that offers technological solutions to small and medium-sized companies. I worked as a UI/UX Designer and Full Stack Developer, prototyping the site in Figma, and then translating it to code using Angular and TypeScript. For internationalization, ngx-translate was used, which allows changing the language without reloading the site.',
             },
             mobydygCore: {
                 title: 'MobyDyg Client Core',
-                description: `MobyDyg's web store with theming per client`,
+                description: `MobyDyg digital store with theming for clients`,
                 long_description:
-                    'This project consists of an online store that adjusts itself according to a theme, designed to provide B2B services by MobyDyg, an e-commerce company that offers technological solutions to small and medium-sized businesses. I worked as a Full Stack Developer, adjusting the existing frontend to mobile screens, fixing bugs, and adding new features with Angular, TypeScript, AWS and MySQL.',
+                    'This project consists of an online store that adjusts according to a theme, designed to provide B2B services by MobyDyg, an e-commerce company that offers technological solutions to small and medium-sized companies. I worked as a Full Stack Developer, adjusting the existing frontend to mobile screens, fixing bugs, and adding new functionalities with Angular, TypeScript, AWS and MySQL.',
             },
             mobydygBackoffice: {
                 title: 'MobyDyg Backoffice',
-                description: `MobyDyg's web store backoffice to handle store settings, orders, and more`,
-                long_description: `This solution is a backoffice to manage MobyDyg's digital stores, an e-commerce company that offers technological solutions to small and medium-sized businesses. I worked as a Full Stack Developer, creating new features with Angular, TypeScript, AWS and MySQL, and as an UI/UX Designer, generating prototypes and improving interfaces with Figma.`,
+                description: `Backoffice to manage MobyDyg's digital store`,
+                long_description:
+                    'This solution consists of a backoffice to manage MobyDyg\'s digital stores, an e-commerce company that offers technological solutions to small and medium-sized companies. I worked as a Full Stack Developer, creating new functionalities with Angular, TypeScript, AWS and MySQL, and as a UI/UX Designer, generating prototypes and improving interfaces with Figma.',
             },
             tournament: {
                 title: 'FCT Tournament App',
                 description:
                     'Tournament application for the Costa Rican Taekwondo Federation',
                 long_description:
-                    'This application was developed for the Costa Rican Taekwondo Federation, and consists of a web solution to manage taekwondo tournaments. I worked as a Full Stack Developer, generating with my team the project from scratch with React, ASP.NET Core, C# and SQL Server. In addition, I acted as an UI/UX Designer, generating prototypes and interfaces with Figma.',
+                    'This application was developed for the Costa Rican Taekwondo Federation, and consists of a web solution to manage taekwondo tournaments. I worked as a Full Stack Developer, generating the project from scratch with my team using React, ASP.NET Core, C# and SQL Server. Additionally, I served as a UI/UX Designer, generating prototypes and interfaces with Figma.',
             },
             moka: {
                 title: 'Moka: Vet & Hotel',
                 description:
-                    'Web application for the management of a veterinary clinic and a hotel for pets',
+                    'Web application for managing a veterinary clinic and pet hotel',
                 long_description:
-                    'A web application for the management of a veterinary clinic and a hotel for pets called Moka. I acted as the Team Lead Developer, generating with my team the solution from scratch using vanilla technologies such as HTML, CSS, and JavaScript, alongside Node.js and MongoDB for the backend. I also worked as an UI/UX Designer, generating the prototypes and interfaces with Figma.',
+                    'Website for controlling appointments and reservations of a veterinary clinic and pet hotel called Moka. I directed the project and acted as Lead Full Stack Developer, generating the solution from scratch with my team using vanilla technologies such as HTML, CSS and JavaScript, along with Node.js and MongoDB for the backend. Additionally, I served as a UI/UX Designer, generating prototypes and interfaces with Figma.',
             },
             tummy: {
                 title: 'Tummy',
                 description:
-                    'Web application that allows you to track your pregnancy cycle, with medical advices per week',
+                    'Web application to track pregnancy and baby, with advice according to stages and weeks',
                 long_description:
-                    'A web application that allows you to track your pregnancy cycle, with medical advices per week. I worked as a developer in a 3-person team, and the project was presented at the 2019 Expotec at CEDES Don Bosco, a science and technology fair where it was awarded for the Best Stand in the category of Software Development. The project was developed using vanilla technologies such as HTML, CSS, and JavaScript, alongside PHP for the backend.',
+                    'Web application to track pregnancy and baby, with advice according to stages and weeks. I worked as a developer on a team of 3 people and the project was presented at the CEDES Don Bosco science and technology fair, Expotec, where it was awarded as the Best Stand of the fair. The project was carried out using vanilla technologies such as HTML, CSS and JavaScript, along with PHP for the backend.',
             },
             cleverSolutions: {
                 title: 'Clever Solutions',
                 description:
-                    'Landing page for Clever Solutions, a fictitious company for UCenfotec Software Project',
+                    'Landing page for Clever Solutions, a fictional company for the UCenfotec Software Project 1 course',
                 long_description:
-                    'Landig page for Clever Solutions, a fictitious company for UCenfotec Software Project I. The project was developed using vanilla technologies such as HTML, CSS, and JavaScript, alongside GitHub Pages for hosting.',
+                    'Landing page for Clever Solutions, a fictional company for the UCenfotec Software Project 1 course. The project was carried out using vanilla technologies such as HTML, CSS and JavaScript, using GitHub Pages for hosting.',
             },
             personalBrand: {
                 title: 'Personal Brand',
-                description: 'Content brand book for my personal brand',
+                description: 'Brand book for my personal brand',
                 long_description:
-                    'Content brand book for my personal brand. Designed with Figma, it includes all the information related to my brand as a professional, from fonts and colors, down to the logo, its meaning, and its allowed use cases. Also, it portrays a section that shows the areas in which I have developed myself at a professional level, with their own logos.',
+                    'Brand book for my personal brand. Designed in Figma, it includes all the information related to my brand as a professional, from typographies and colors to the logo, its meaning, and its allowed uses. Additionally, it covers a section that shows the areas in which I have worked professionally, with their respective logos.',
             },
             iki: {
                 title: 'iki',
-                description: 'Breathing app concept that helps you relax and focus',
+                description:
+                    'Application concept for breathing and relaxation exercises',
                 long_description:
-                    'Breathing app concept that helps you relax and focus. Designed with Figma, it includes the design and essence of the brand, color palette, mockups and a prototype of the app for mobile devices. It was designed as an idea for my graduation project, and is pending to be coded into a functional application.',
+                    'Application concept for breathing and relaxation exercises. Designed in Figma, it includes the design and brand essence, color palette, mockups and a prototype for mobile screens. It was designed as a concept for my graduation project, and is pending to be programmed as a functional application in the future.',
             },
             findingTheMeaning: {
                 title: 'Finding the Meaning',
                 description:
-                    'Content brand book for Finding the Meaning, an UCenfotec Podcast',
+                    'Brand book for Finding the Meaning, a UCenfotec podcast',
                 long_description:
-                    'Content brand book for Finding the Meaning, an UCenfotec Podcast. Designed with Figma, it includes all the information related to the podcast, from fonts and colors, down to the logo, its meaning, and its allowed use cases. My role in this project has been as a main designer, and I help creating brand content for publicity campains in social media.',
+                    'Brand book for Finding the Meaning, a UCenfotec podcast. Designed in Figma, it includes all the information related to the podcast, from typographies and colors to the logo, its meaning, and its allowed uses. I have operated in the project as the main designer, and I collaborate with content creation and branding for expectation and advertising campaigns on social networks.',
             },
         },
     },
