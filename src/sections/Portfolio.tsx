@@ -1,7 +1,8 @@
-import ProjectCard from '../components/ProjectCard/ProjectCard';
+import { ProjectTiltedCard } from '../components';
 import { PROJECTS } from '../constants/projects';
 import { useTranslation } from 'react-i18next';
 import { RefObject } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export type PortfolioProps = {
     withSearch?: boolean;
@@ -10,6 +11,11 @@ export type PortfolioProps = {
 
 const Portfolio: React.FC<PortfolioProps> = ({ withSearch = false, reference }) => {
     const { t } = useTranslation('portfolio');
+    const navigate = useNavigate();
+
+    const handleProjectClick = (index: number) => {
+        navigate(`/project/${ index }`);
+    };
 
     return (
         <section ref={ reference } id='portfolio' className="w-full bg-base-100 p-10">
@@ -28,23 +34,21 @@ const Portfolio: React.FC<PortfolioProps> = ({ withSearch = false, reference }) 
               </div>
             )} */}
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols-5 4xl:grid-cols-6 gap-12">
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols-5 4xl:grid-cols-6 gap-12 justify-items-center">
                     { PROJECTS.map((PROJECT, index) => (
-                        <ProjectCard
+                        <ProjectTiltedCard
                             index={ index }
                             key={ PROJECT.title }
-                            tags={ PROJECT.tags }
                             title={ PROJECT.title }
                             categ={ PROJECT.categ }
                             img={ PROJECT.coverImg }
                             desc={ PROJECT.desc }
                             textColor={ PROJECT.textColor }
-                            tagsBgColor={ PROJECT.tagsBgColor }
-                            showAuthor={ false }
-                            showTags={ true }
+                            onClick={ () => handleProjectClick(index) }
                         />
                     )) }
                 </div>
+
             </div>
         </section>
     );
