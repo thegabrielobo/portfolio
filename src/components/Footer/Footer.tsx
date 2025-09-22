@@ -16,11 +16,11 @@ export const Footer = () => {
                         icon={ <FaWhatsapp className="h-5 w-5 md:h-6 md:w-6" /> }
                     />
                     <IconButton
-                        onClick={ () => window.open('https://github.com/glovooker') }
+                        onClick={ () => window.open('https://github.com/thegabrielobo') }
                         icon={ <FaGithub className="h-5 w-5 md:h-6 md:w-6" /> }
                     />
                     <IconButton
-                        onClick={ () => window.open('https://www.linkedin.com/in/glovooker/') }
+                        onClick={ () => window.open('https://www.linkedin.com/in/thegabrielobo/') }
                         icon={ <FaLinkedin className="h-5 w-5 md:h-6 md:w-6" /> }
                     />
                 </div>
