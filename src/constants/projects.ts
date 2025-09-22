@@ -96,8 +96,7 @@ export const findingTheMeaning10 = `${ cloudinaryBase }/projects/finding-the-mea
 
 import { tags } from './tags';
 import { TagProps } from '../components/ProjectCard/ProjectCard';
-import { Avatar } from '../components/Avatars/Avatars';
-import { contributors } from './contributors';
+import { contributors, ContributorsList } from './contributors';
 
 type ProjectList = {
     tags: TagProps[];
@@ -109,7 +108,12 @@ type ProjectList = {
     textColor: string;
     tagsBgColor: string;
     projectImg?: string[];
-    contributors: Avatar[];
+    contributors: {
+        name: string;
+        handle: string;
+        image: string;
+        link: string;
+    }[];
     previewLink?: string;
     githubLink?: string;
     figmaLink?: string;
@@ -222,6 +226,7 @@ export const PROJECTS: ProjectList[] = [
             contributors.glovooker,
             contributors.woodsoul,
             contributors.saturnxs,
+            contributors.bistec,
             contributors.anderlyn,
             contributors.fabianMena,
         ],
@@ -239,24 +244,24 @@ export const PROJECTS: ProjectList[] = [
         projectImg: [mobydygSite1, mobydygSite2, mobydygSite3],
         contributors: [contributors.glovooker],
     },
-    {
-        tags: [tags.angular, tags.scss, tags.typescript, tags.aws, tags.mysql],
-        title: 'mobydygCore.title',
-        categ: 'SOFT · DES',
-        coverImg: mobydygCover,
-        desc: 'mobydygCore.description',
-        longDesc: 'mobydygCore.long_description',
-        previewLink: 'https://merakienlinea.com/',
-        textColor: 'text-[#EA803F]',
-        tagsBgColor: 'bg-[#EA803F]',
-        projectImg: [mobydygClientCore1, mobydygClientCore2, mobydygClientCore3],
-        contributors: [
-            contributors.glovooker,
-            contributors.woodsoul,
-            contributors.saturnxs,
-            contributors.eduardoFont,
-        ],
-    },
+    // {
+    //     tags: [tags.angular, tags.scss, tags.typescript, tags.aws, tags.mysql],
+    //     title: 'mobydygCore.title',
+    //     categ: 'SOFT · DES',
+    //     coverImg: mobydygCover,
+    //     desc: 'mobydygCore.description',
+    //     longDesc: 'mobydygCore.long_description',
+    //     previewLink: 'https://merakienlinea.com/',
+    //     textColor: 'text-[#EA803F]',
+    //     tagsBgColor: 'bg-[#EA803F]',
+    //     projectImg: [mobydygClientCore1, mobydygClientCore2, mobydygClientCore3],
+    //     contributors: [
+    //         contributors.glovooker,
+    //         contributors.woodsoul,
+    //         contributors.saturnxs,
+    //         contributors.eduardoFont,
+    //     ],
+    // },
     {
         tags: [
             tags.angular,

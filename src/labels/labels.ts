@@ -7,6 +7,8 @@ const resources = {
             projects: 'Proyectos',
             es: 'Español',
             en: 'Inglés',
+            theme: 'Tema',
+            language: 'Idioma',
         },
         home: {
             title: 'Inicio',
@@ -31,6 +33,17 @@ const resources = {
             description_2: `Como fan de la tecnología y del conocimiento, si tienes una idea que pueda benificiarse de mis habilidades para hacerse realidad, te invito a revisar mi currículum.`,
             description_3: `¡Siéntase libre de contactarme tan pronto como lo desea!`,
             view_resume: 'Ingresa a mi Resume',
+        },
+        work_experience: {
+            title: 'Experiencia Laboral',
+            description: 'Mi trayectoria profesional a través de diversas empresas y roles, construyendo conocimiento y experiencia en desarrollo de software.',
+        },
+        interview: {
+            title: '¿Qué significa ser un Estudiante de Software de Excelencia en UCenfotec?',
+            description: 'Haz clic para ver la entrevista completa',
+            watch_on_youtube: 'Ver en YouTube',
+            watch: 'Ver',
+            duration: '4:21',
         },
         footer: {
             copyright: 'Gabriel Lobo. Todos los derechos reservados.',
@@ -169,6 +182,8 @@ const resources = {
             projects: 'Projects',
             es: 'Spanish',
             en: 'English',
+            theme: 'Theme',
+            language: 'Language',
         },
         home: {
             title: 'Home',
@@ -193,6 +208,17 @@ const resources = {
             description_2: `As a fan of technology and knowledge, if you have an idea that could use my abilities to come to reality, feel free to check out my CV.`,
             description_3: `Don't forget to contact me as soon as you want!`,
             view_resume: 'View Resume',
+        },
+        work_experience: {
+            title: 'Work Experience',
+            description: 'My professional journey through various companies and roles, building experience and expertise in software development.',
+        },
+        interview: {
+            title: 'What it means to be an Elite Software Student at UCenfotec',
+            description: 'Click to watch the full interview',
+            watch_on_youtube: 'Watch on YouTube',
+            watch: 'Watch',
+            duration: '4:21',
         },
         footer: {
             copyright: 'Gabriel Lobo. All rights reserved.',

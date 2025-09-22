@@ -5,7 +5,7 @@ import { withBasicLayout } from '../layout/basicLayout';
 import AboutMe from '../sections/AboutMe';
 import Hero from '../sections/Hero';
 import Portfolio from '../sections/Portfolio';
-import Carousel from '../sections/Carousel';
+import WorkExperience from '../sections/WorkExperience';
 import { Button } from '../components';
 
 export type SectionsReferences = {
@@ -92,7 +92,6 @@ export const Home = () => {
                 reference={ heroRef }
                 sectionsRef={ sectionsRef }
             />
-            <Carousel />
             <AboutMe
                 title={ 'title' }
                 description={ ['description_1', 'description_2', 'description_3'] }
@@ -100,6 +99,7 @@ export const Home = () => {
                 sectionsRef={ sectionsRef }
                 isLeft={ true }
             />
+            <WorkExperience />
             <Portfolio reference={ portfolioRef } />
 
             {/* Floating scroll-to-top button - appears when About Me is visible */ }

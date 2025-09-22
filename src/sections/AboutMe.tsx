@@ -34,11 +34,11 @@ const AboutMe: React.FC<AboutMeProps> = (props) => {
         <section
             id="about-me"
             ref={ props.reference }
-            className={ `relative flex flex-col lg:flex-row items-center justify-center w-full min-h-screen py-16 pb-24 bg-base-100` }
+            className={ `relative flex flex-col lg:flex-row items-center justify-center w-full py-8 lg:py-12 bg-base-100` }
         >
             <div className="container mx-auto max-w-8xl px-4">
                 <div className="flex flex-col lg:flex-row items-center justify-center">
-                    <div className="py-12 px-8 lg:py-20 lg:px-20 z-20 justify-center lg:w-1/2">
+                    <div className="py-6 px-8 lg:py-8 lg:px-12 z-20 justify-center lg:w-1/2">
                         <h2 className="text-3xl md:text-5xl font-bold mb-6 text-primary">
                             { t(props.title) }
                         </h2>
@@ -52,7 +52,7 @@ const AboutMe: React.FC<AboutMeProps> = (props) => {
                         </div>
                     </div>
 
-                    <div className="flex items-center p-8 lg:p-24 justify-center lg:w-1/2">
+                    <div className="flex items-center p-6 lg:p-12 justify-center lg:w-1/2">
                         <InterviewPreview preview={ hero } />
                     </div>
                 </div>

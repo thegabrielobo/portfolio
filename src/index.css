@@ -65,4 +65,13 @@ body {
     .scrollbar-tag::-webkit-scrollbar-thumb:hover {
         background: hsl(var(--bc) / 0.5);
     }
+
+    /* Timeline logo styling */
+    .timeline-logo {
+        filter: none; /* Light mode: no filter, show original colors */
+    }
+
+    [data-theme="dark"] .timeline-logo {
+        filter: brightness(0) invert(1); /* Dark mode: white logos */
+    }
 }

@@ -55,7 +55,7 @@ const LanguageSwitch = (props: Props) => {
                     />
                 </svg>
             </div>
-            <ul tabIndex={ 0 } className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-32">
+            <ul tabIndex={ 0 } className="dropdown-content z-[60] menu p-2 shadow bg-base-100 rounded-box w-32">
                 { props.items.map((item) => (
                     <li key={ item.label }>
                         <button

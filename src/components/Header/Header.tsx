@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 import { useTranslation } from 'react-i18next';
 import logo from '../../assets/img/logo.svg';
@@ -52,6 +52,7 @@ export const Header = ({
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [activeSection, setActiveSection] = useState('hero');
     const { t } = useTranslation('header');
+    const menuRef = useRef<HTMLDivElement>(null);
 
     const [navBackground, setNavBackground] = useState('bg-transparent');
 
@@ -115,6 +116,23 @@ export const Header = ({
         };
     }, [disableScrollEffect]);
 
+    // Close menu when clicking outside
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+                setIsMenuOpen(false);
+            }
+        };
+
+        if (isMenuOpen) {
+            document.addEventListener('mousedown', handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [isMenuOpen]);
+
     const languages: DDMItem[] = [
         {
             label: 'en',
@@ -150,9 +168,9 @@ export const Header = ({
     return (
         <div className={ `navbar fixed top-0 z-50 transition-all duration-300 ease-in-out ${ navBackground === 'bg-transparent' ? 'bg-transparent' : 'backdrop-blur-md bg-base-100/10' } ${ withShadow ? 'shadow-lg' : '' } ${ isFat ? 'py-4' : '' }` }>
             {/* Logo positioned absolutely */ }
-            <div className="absolute left-8 top-4 mix-blend-difference">
+            <div className="absolute left-4 lg:left-8 top-4 mix-blend-difference">
                 <Link className="text-xl text-base-content hover:opacity-80 transition-opacity duration-200" to=".">
-                    <svg width="48" height="48" viewBox="0 0 2000 2000" fill="none" xmlns="http://www.w3.org/2000/svg" className="h-12 w-12">
+                    <svg width="48" height="48" viewBox="0 0 2000 2000" fill="none" xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 lg:h-12 lg:w-12">
                         <g clipPath="url(#clip0_62_54)">
                             <path d="M2000 1000C2000 1197.78 1941.35 1391.12 1831.47 1555.57C1721.59 1720.02 1565.41 1848.19 1382.68 1923.88C1199.96 1999.57 998.891 2019.37 804.91 1980.79C610.929 1942.2 432.746 1846.96 292.893 1707.11C153.041 1567.25 57.7999 1389.07 19.2147 1195.09C-19.3705 1001.11 0.432836 800.043 76.1205 617.317C151.808 434.59 279.981 278.412 444.43 168.53C608.879 58.649 802.219 -2.35852e-06 1000 0V500C901.109 500 804.439 529.324 722.215 584.265C639.99 639.206 575.904 717.295 538.06 808.658C500.216 900.021 490.315 1000.55 509.607 1097.55C528.9 1194.54 576.52 1283.63 646.447 1353.55C716.373 1423.48 805.464 1471.1 902.455 1490.39C999.445 1509.69 1099.98 1499.78 1191.34 1461.94C1282.7 1424.1 1360.79 1360.01 1415.73 1277.79C1470.68 1195.56 1500 1098.89 1500 1000H2000Z" fill="currentColor" />
                             <path d="M1090.4 0.00012207H1587.57V435.028H2000V909.604H1090.4V0.00012207Z" fill="currentColor" />
@@ -167,37 +185,7 @@ export const Header = ({
             </div>
 
             <div className='navbar-start'>
-                <div className='dropdown'>
-                    <div tabIndex={ 0 } role="button" className="btn btn-ghost lg:hidden" onClick={ () => setIsMenuOpen(!isMenuOpen) }>
-                        <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
-                        </svg>
-                    </div>
-                    { (isMenuOpen || forceMenuOpenInMobile) && (
-                        <ul tabIndex={ 0 } className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                            { links?.map((link) => (
-                                <li key={ link.label }>
-                                    <a
-                                        href={ link.link || '/' }
-                                        onClick={ (e) => {
-                                            handleLinkClick(e, link.link || '/');
-                                            setIsMenuOpen(false);
-                                        } }
-                                        className={ link.isSelected ? 'active' : '' }
-                                    >
-                                        { link.label }
-                                    </a>
-                                </li>
-                            )) }
-                            <li className="lg:hidden">
-                                <div className="flex items-center justify-between w-full">
-                                    <span>Theme</span>
-                                    <ThemeSwitch />
-                                </div>
-                            </li>
-                        </ul>
-                    ) }
-                </div>
+                {/* Empty navbar-start to push content to center and end */ }
             </div>
             <div className='navbar-center hidden lg:flex'>
                 <ul className={ `menu menu-horizontal gap-12 transition-opacity duration-300 ${ navBackground === 'bg-transparent' ? 'opacity-0' : 'opacity-100' }` }>
@@ -221,6 +209,54 @@ export const Header = ({
                 </ul>
             </div>
             <div className='navbar-end'>
+                {/* Mobile hamburger menu */ }
+                <div className='relative lg:hidden' ref={ menuRef }>
+                    <button
+                        className="btn btn-ghost btn-circle"
+                        onClick={ () => {
+                            console.log('Hamburger clicked, current state:', isMenuOpen);
+                            setIsMenuOpen(!isMenuOpen);
+                        } }
+                        aria-label="Toggle menu"
+                    >
+                        <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
+                        </svg>
+                    </button>
+                    { (isMenuOpen || forceMenuOpenInMobile) && (
+                        <div className="absolute right-0 top-full mt-2 w-48 bg-base-100 rounded-lg shadow-lg border border-base-300 z-[9999]">
+                            <ul className="menu menu-sm p-2">
+                                { links?.map((link) => (
+                                    <li key={ link.label }>
+                                        <a
+                                            href={ link.link || '/' }
+                                            onClick={ (e) => {
+                                                handleLinkClick(e, link.link || '/');
+                                                setIsMenuOpen(false);
+                                            } }
+                                            className={ link.isSelected ? 'active' : '' }
+                                        >
+                                            { link.label }
+                                        </a>
+                                    </li>
+                                )) }
+                                <li className="lg:hidden">
+                                    <div className="flex items-center justify-between w-full">
+                                        <span>{ t('theme') }</span>
+                                        <ThemeSwitch />
+                                    </div>
+                                </li>
+                                <li className="lg:hidden">
+                                    <div className="flex items-center justify-between w-full">
+                                        <span>{ t('language') }</span>
+                                        <LanguageSwitch items={ languages } />
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    ) }
+                </div>
+
                 { !hideGitHubLink && (
                     <a
                         href='https://github.com/Charlie85270/tail-kit'
@@ -238,7 +274,7 @@ export const Header = ({
                         </svg>
                     </a>
                 ) }
-                <div className='hidden md:block ml-2 mix-blend-difference'>
+                <div className='hidden lg:block ml-2 mix-blend-difference'>
                     <ThemeSwitch />
                     <LanguageSwitch items={ languages } />
                 </div>

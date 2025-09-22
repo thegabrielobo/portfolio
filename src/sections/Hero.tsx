@@ -61,10 +61,10 @@ const Hero: React.FC<Props> = (props) => {
         >
             <div className="container flex flex-col items-center justify-center relative py-16 text-center">
                 <div className="w-full flex flex-col relative z-20 pointer-events-none">
-                    <h1 className="font-black md:text-4xl lg:text-8xl 2xl:text-9xl flex flex-col leading-none text-base-content drop-shadow-lg">
+                    <h1 className="font-black text-4xl sm:text-5xl md:text-6xl lg:text-8xl 2xl:text-9xl flex flex-col leading-none text-base-content drop-shadow-lg">
                         Gabriel Lobo
                     </h1>
-                    <div className='font-semibold mt-2 text-xl md:text-lg lg:text-3xl text-base-content flex justify-center'>
+                    <div className='font-semibold mt-2 text-xl sm:text-2xl md:text-2xl lg:text-3xl text-base-content flex justify-center'>
                         <RotatingText
                             texts={ titles }
                             auto={ true }

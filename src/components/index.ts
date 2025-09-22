@@ -10,3 +10,5 @@ export { default as TiltedCard } from './TiltedCard/TiltedCard';
 export { default as ProjectTiltedCard } from './ProjectTiltedCard/ProjectTiltedCard';
 export { default as ProjectDetails } from './ProjectDetails/ProjectDetails';
 export { default as ChromaGrid } from './ChromaGrid/ChromaGrid';
+export { default as Timeline } from './Timeline/Timeline';
+export { default as StarBorder } from './StarBorder/StarBorder';

@@ -57,7 +57,7 @@ export const contributors: ContributorsList = {
     },
     bistec: {
         name: 'Josías Hidalgo',
-        handle: 'bistec',
+        handle: 'ppixelbro',
         image: josiasHidalgo,
         link: 'https://www.linkedin.com/in/josias-hidalgo-b3238b21a/',
     },

@@ -29,7 +29,7 @@ i18n
 
       // Namespace options
       defaultNS: 'common',
-      ns: ['common', 'home', 'about_me', 'portfolio', 'projects', 'header'],
+      ns: ['common', 'home', 'about_me', 'portfolio', 'projects', 'header', 'work_experience', 'interview'],
   });
 
 export default i18n;

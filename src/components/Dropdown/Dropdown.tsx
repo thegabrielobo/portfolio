@@ -27,7 +27,7 @@ const Dropdown = ({
   const [isOpen, setIsOpen] = useState(false);
 
   const dropdownContent = (forceOpen || isOpen) && (
-      <div className='origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-base-100 ring-1 ring-base-300'>
+      <div className='origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-base-100 ring-1 ring-base-300 z-[60]'>
       <div
               className={ `py-1 ${ withDivider ? 'divide-y divide-base-200' : '' }` }
         role='menu'
