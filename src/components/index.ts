@@ -1,4 +1,3 @@
-export * from './Avatars/Avatars';
 export * from './Button/Button';
 export * from './Dropdown/Dropdown';
 export * from './IconButton/IconButton';
@@ -10,3 +9,4 @@ export * from './ThemeSwitch/ThemeSwitch';
 export { default as TiltedCard } from './TiltedCard/TiltedCard';
 export { default as ProjectTiltedCard } from './ProjectTiltedCard/ProjectTiltedCard';
 export { default as ProjectDetails } from './ProjectDetails/ProjectDetails';
+export { default as ChromaGrid } from './ChromaGrid/ChromaGrid';

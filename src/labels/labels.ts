@@ -32,6 +32,9 @@ const resources = {
             description_3: `¡Siéntase libre de contactarme tan pronto como lo desea!`,
             view_resume: 'Ingresa a mi Resume',
         },
+        footer: {
+            copyright: 'Gabriel Lobo. Todos los derechos reservados.',
+        },
         portfolio: {
             title: 'Portafolio',
             description:
@@ -41,6 +44,13 @@ const resources = {
             check_it_out: '¡Míralo aquí!',
             open_project: 'Abrir proyecto',
             view_details: 'Ver detalles',
+            back_to_portfolio: '← Volver al Portafolio',
+            about_this_project: 'Acerca de este Proyecto',
+            project_screenshots: 'Capturas del Proyecto',
+            contributors: 'Contribuidores',
+            view_live: 'Ver en Vivo',
+            view_code: 'Ver Código',
+            view_design: 'Ver Diseño',
             engage360: {
                 title: 'Engage360',
                 description:
@@ -184,6 +194,9 @@ const resources = {
             description_3: `Don't forget to contact me as soon as you want!`,
             view_resume: 'View Resume',
         },
+        footer: {
+            copyright: 'Gabriel Lobo. All rights reserved.',
+        },
         portfolio: {
             title: 'Portfolio',
             description:
@@ -193,6 +206,13 @@ const resources = {
             check_it_out: 'Check it out!',
             open_project: 'Open project',
             view_details: 'View details',
+            back_to_portfolio: '← Back to Portfolio',
+            about_this_project: 'About This Project',
+            project_screenshots: 'Project Screenshots',
+            contributors: 'Contributors',
+            view_live: 'View Live',
+            view_code: 'View Code',
+            view_design: 'View Design',
             engage360: {
                 title: 'Engage360',
                 description:

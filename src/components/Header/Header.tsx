@@ -20,6 +20,7 @@ interface Props {
     hideHelp?: boolean;
     withSearchBar?: boolean;
     withRequestLink?: boolean;
+    disableScrollEffect?: boolean;
 }
 
 interface HeaderLink {
@@ -45,7 +46,8 @@ export const Header = ({
     forceDDMOpenInMobile = false,
     links = [],
     ddmItems = [],
-    hideGitHubLink = false
+    hideGitHubLink = false,
+    disableScrollEffect = false
 }: Props) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [activeSection, setActiveSection] = useState('hero');
@@ -54,6 +56,15 @@ export const Header = ({
     const [navBackground, setNavBackground] = useState('bg-transparent');
 
     useEffect(() => {
+        // If scroll effect is disabled, set transparent background and don't set up scroll listener
+        if (disableScrollEffect) {
+            setNavBackground('bg-transparent');
+            return;
+        }
+
+        // Reset to transparent for home page
+        setNavBackground('bg-transparent');
+
         let rafId: number;
         let lastScrollY = window.scrollY;
 
@@ -68,9 +79,9 @@ export const Header = ({
 
                 // Only update if scroll position changed significantly
                 if (Math.abs(currentScrollY - lastScrollY) > 5) {
-                    if (show && navBackground === 'bg-transparent') {
+                    if (show) {
                         setNavBackground('backdrop-blur-md bg-base-100/10');
-                    } else if (!show && navBackground === 'backdrop-blur-md bg-base-100/10') {
+                    } else {
                         setNavBackground('bg-transparent');
                     }
 
@@ -102,7 +113,7 @@ export const Header = ({
                 cancelAnimationFrame(rafId);
             }
         };
-    }, [navBackground]);
+    }, [disableScrollEffect]);
 
     const languages: DDMItem[] = [
         {

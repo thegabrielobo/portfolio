@@ -20,8 +20,8 @@ const InterviewPreview = ({ preview }: { preview: string; }) => {
     return (
         <>
             <div
-                className="hidden relative md:flex justify-center items-center overflow-hidden rounded-lg w-fit m-auto cursor-pointer"
-                style={ { width: '35vw', height: `calc(35vw * (9 / 16))`, maxWidth: '100%', maxHeight: '100%', aspectRatio: '16 / 9' } }
+                className="hidden relative md:flex justify-center items-center overflow-hidden rounded-lg w-fit m-auto cursor-pointer aspect-video"
+                style={ { width: '35vw', maxWidth: '100%' } }
                 onClick={ handleVideoPlay }
             >
                 { !isVideoPlaying ? (
@@ -30,7 +30,7 @@ const InterviewPreview = ({ preview }: { preview: string; }) => {
                         onMouseEnter={ () => setIsHovered(true) }
                         onMouseLeave={ () => setIsHovered(false) }
                     >
-                        <img src={ preview } alt="Interview Preview" className="w-full m-full rounded-lg" />
+                        <img src={ preview } alt="Interview Preview" className="w-full h-full object-cover rounded-lg" />
                         { isHovered && (
                             <div className="absolute inset-0 flex justify-center items-center w-auto m-auto bg-primary bg-opacity-25 transition-all duration-3000 ease-in-out">
                                 <FaPlay className="w-12 h-12 fill-white" />
@@ -50,13 +50,13 @@ const InterviewPreview = ({ preview }: { preview: string; }) => {
             </div>
 
             <div
-                className="relative flex md:hidden justify-center items-center overflow-hidden rounded-lg w-fit m-auto"
+                className="relative flex md:hidden justify-center items-center overflow-hidden rounded-lg w-full m-auto aspect-video"
                 onMouseEnter={ () => setIsHovered(true) }
                 onMouseLeave={ () => setIsHovered(false) }
                 onClick={ openInterview }
                 style={ { cursor: 'pointer' } }
             >
-                <img src={ preview } alt="Interview Preview" className="w-auto m-auto rounded-lg" />
+                <img src={ preview } alt="Interview Preview" className="w-full h-full object-cover rounded-lg" />
                 { isHovered && (
                     <div className="absolute inset-0 flex justify-center items-center w-auto m-auto bg-primary bg-opacity-25 transition-all duration-3000 ease-in-out">
                         <FaPlay className="w-12 h-12 fill-white" />

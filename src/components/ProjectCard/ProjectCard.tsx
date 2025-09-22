@@ -48,7 +48,7 @@ const ProjectCard = ({
                 <img
                     alt={ title + ' Cover' }
                     src={ img }
-                    className='w-full h-full object-cover'
+                    className='w-full h-full object-cover shadow-md'
                 />
             </figure>
             <div className='card-body'>

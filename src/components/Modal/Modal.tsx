@@ -5,7 +5,7 @@ import { FaGithub, FaFigma } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 
 import { useOutsideClick, useScrollLock } from '../../hooks';
-import { Avatars, Button, IconButton } from '../';
+import { Button, IconButton } from '../';
 import { PROJECTS } from '../../constants/projects';
 
 type ModalProps = {
@@ -92,10 +92,6 @@ export const Modal = ({ projectIndex, open, onClose }: ModalProps) => {
                                 </div>
                             </div>
 
-                            <Avatars
-                                avatars={ currentProject.contributors }
-                                withHoverEffect={ true }
-                            />
 
                             <p className='mt-4 text-sm leading-6 text-base-content/70 max-h-32 md:max-h-[15vh] overflow-y-auto scrollbar-tag'>
                                 { t(currentProject.longDesc) }

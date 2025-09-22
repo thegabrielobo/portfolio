@@ -18,7 +18,7 @@ const Portfolio: React.FC<PortfolioProps> = ({ withSearch = false, reference }) 
     };
 
     return (
-        <section ref={ reference } id='portfolio' className="w-full bg-base-100 p-10">
+        <section ref={ reference } id='portfolio' className="w-full bg-base-100 p-10 pb-20">
             <div className="container mx-auto max-w-8xl px-4">
                 <div className="header font-black flex items-end justify-between mb-12">
                     <div>

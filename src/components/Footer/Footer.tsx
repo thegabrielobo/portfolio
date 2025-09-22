@@ -1,13 +1,15 @@
 import { FaGithub, FaLinkedin, FaWhatsapp } from 'react-icons/fa';
+import { useTranslation } from 'react-i18next';
 import { IconButton } from '..';
 
 export const Footer = () => {
+    const { t } = useTranslation('footer');
     const year = new Date().getFullYear(); // Dynamically get the current year
 
     return (
         <footer className="footer footer-center p-4 bg-base-100 text-base-content relative">
             <div className="flex justify-between items-center w-full max-w-6xl">
-                <span className='text-xs md:text-base'>© { year } Gabriel Lobo. All rights reserved.</span>
+                <span className='text-xs md:text-base'>© { year } { t('copyright') }</span>
                 <div className='flex gap-2'>
                     <IconButton
                         onClick={ () => window.open('https://wa.me/50683833903') }

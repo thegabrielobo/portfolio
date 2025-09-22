@@ -9,9 +9,15 @@ interface Props {
 }
 
 const LanguageSwitch = (props: Props) => {
-    const { t } = useTranslation('header');
+    const { t, i18n } = useTranslation('header');
 
-    const [selectedItem, setSelectedItem] = useState<DDMItem>(props.items[0]);
+    // Initialize with current language or default to first item
+    const getCurrentLanguageItem = () => {
+        const currentLang = i18n.language || 'en';
+        return props.items.find(item => item.label === currentLang) || props.items[0];
+    };
+
+    const [selectedItem, setSelectedItem] = useState<DDMItem>(getCurrentLanguageItem());
 
     const handleLanguageChange = (lng: string) => {
         i18next.changeLanguage(lng);
@@ -21,6 +27,15 @@ const LanguageSwitch = (props: Props) => {
         setSelectedItem(item);
         handleLanguageChange(item.label);
     };
+
+    // Update selected item when language changes externally
+    useEffect(() => {
+        const currentLang = i18n.language || 'en';
+        const currentItem = props.items.find(item => item.label === currentLang);
+        if (currentItem && currentItem.label !== selectedItem.label) {
+            setSelectedItem(currentItem);
+        }
+    }, [i18n.language, props.items, selectedItem.label]);
 
     return (
         <div className='dropdown dropdown-end'>

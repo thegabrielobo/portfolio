@@ -107,7 +107,7 @@ export default function TiltedCard ({
             ) }
 
             <motion.div
-                className="relative [transform-style:preserve-3d]"
+                className="relative [transform-style:preserve-3d] bg-base-200/30 rounded-[15px]"
                 style={ {
                     width: imageWidth,
                     height: imageHeight,
@@ -119,7 +119,7 @@ export default function TiltedCard ({
                 <motion.img
                     src={ imageSrc }
                     alt={ altText }
-                    className="absolute top-0 left-0 object-cover rounded-[15px] will-change-transform [transform:translateZ(0)]"
+                    className="absolute top-0 left-0 object-cover rounded-[15px] will-change-transform [transform:translateZ(0)] shadow-lg"
                     style={ {
                         width: imageWidth,
                         height: imageHeight

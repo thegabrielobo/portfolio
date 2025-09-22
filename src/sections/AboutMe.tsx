@@ -34,7 +34,7 @@ const AboutMe: React.FC<AboutMeProps> = (props) => {
         <section
             id="about-me"
             ref={ props.reference }
-            className={ `relative flex flex-col lg:flex-row items-center justify-center w-full min-h-screen py-16 bg-base-100` }
+            className={ `relative flex flex-col lg:flex-row items-center justify-center w-full min-h-screen py-16 pb-24 bg-base-100` }
         >
             <div className="container mx-auto max-w-8xl px-4">
                 <div className="flex flex-col lg:flex-row items-center justify-center">
