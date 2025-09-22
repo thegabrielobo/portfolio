@@ -59,19 +59,30 @@ export const Home = () => {
     };
 
     useEffect(() => {
-        const checkScrollPosition = () => {
-            if (window.scrollY > 90) {
-                setShowButton(true);
-            } else {
-                setShowButton(false);
-            }
-        };
+        // Use intersection observer to show button when Portfolio section is visible
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        setShowButton(true);
+                    } else {
+                        setShowButton(false);
+                    }
+                });
+            },
+            { threshold: 0.1 } // Show when 10% of the section is visible
+        );
 
-        window.addEventListener('scroll', checkScrollPosition);
+        // Observe the Portfolio section
+        const portfolioElement = portfolioRef.current;
+        if (portfolioElement) {
+            observer.observe(portfolioElement);
+        }
 
-        // Clean up the event listener when the component is unmounted
         return () => {
-            window.removeEventListener('scroll', checkScrollPosition);
+            if (portfolioElement) {
+                observer.unobserve(portfolioElement);
+            }
         };
     }, []);
 
@@ -91,6 +102,7 @@ export const Home = () => {
             />
             <Portfolio reference={ portfolioRef } />
 
+            {/* Floating scroll-to-top button - appears when About Me is visible */ }
             { showButton && (
                 <Button
                     isFloating={ true }

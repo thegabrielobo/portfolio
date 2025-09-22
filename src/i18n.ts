@@ -9,7 +9,7 @@ i18n
   .init({
     resources,
       fallbackLng: 'en', // Fallback language
-      debug: process.env.NODE_ENV === 'development', // Debug only in development
+      debug: false, // Disable debug mode to reduce console noise
 
       // Language detection options
       detection: {

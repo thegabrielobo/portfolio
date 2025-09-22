@@ -1,0 +1,19 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "editor.tabSize": 4,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnPaste": true,
+    "typescript.format.insertSpaceAfterTypeAssertion": true,
+    "files.trimFinalNewlines": true,
+    "workbench.editor.highlightModifiedTabs": true,
+    "prettier.jsxSingleQuote": true,
+    "prettier.singleQuote": true,
+    "editor.formatOnSave": true,
+    "liveServer.settings.port": 5501
+  }
+}

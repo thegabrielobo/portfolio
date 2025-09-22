@@ -20,38 +20,42 @@ const AboutMe: React.FC<AboutMeProps> = (props) => {
     const { t } = useTranslation('about_me');
 
     const renderDescription = () => {
-        return props.description?.map((description, index) => (
+        return props.description?.map((item, index) => (
             <p
-                key={ `description_${ index + 1 }` }
-                className={ `text-base md:text-lg mt-4 text-glovooker-green-100 ${ index === 2 ? 'font-bold' : '' }` }
+                key={ index }
+                className={ `text-base md:text-lg mt-4 text-primary ${ index === 2 ? 'font-bold' : '' }` }
             >
-                { t(description) }
+                { t(item) }
             </p>
         ));
     };
 
     return (
         <section
-            id="about"
+            id="about-me"
             ref={ props.reference }
-            className="bg-white overflow-hidden relative flex flex-col lg:flex-row lg:items-center"
+            className={ `relative flex flex-col lg:flex-row items-center justify-center w-full min-h-screen py-16 bg-base-100` }
         >
-            <div className="py-12 px-16 md:px-8 lg:py-20 lg:px-20 z-20 justify-center lg:w-1/2">
-                <h2 className="text-3xl md:text-4xl font-circularblack text-glovooker-green-100 mb-10 max-w-3xl">
-                    <span className="block">{ t(props.title) }</span>
-                </h2>
-                { renderDescription() }
-                <div className="flex mt-5 sm:mt-10">
-                    <Button
-                        label={ t('view_resume').toString() }
-                        icon={ <FiExternalLink className="ml-2 h-5 w-5" /> }
-                        onClick={ () => window.open('https://drive.google.com/file/d/1RCFSEzpYfF0TRMQGtc1n6efWuFbFoNdw/view?usp=sharing') }
-                    />
-                </div>
-            </div>
+            <div className="container mx-auto max-w-8xl px-4">
+                <div className="flex flex-col lg:flex-row items-center justify-center">
+                    <div className="py-12 px-8 lg:py-20 lg:px-20 z-20 justify-center lg:w-1/2">
+                        <h2 className="text-3xl md:text-5xl font-bold mb-6 text-primary">
+                            { t(props.title) }
+                        </h2>
+                        { renderDescription() }
+                        <div className="flex mt-5 sm:mt-10">
+                            <Button
+                                label={ t('view_resume').toString() }
+                                icon={ <FiExternalLink className="ml-2 h-5 w-5" /> }
+                                onClick={ () => window.open('https://drive.google.com/file/d/1RCFSEzpYfF0TRMQGtc1n6efWuFbFoNdw/view?usp=sharing') }
+                            />
+                        </div>
+                    </div>
 
-            <div className="flex items-center p-8 lg:p-24 justify-center lg:w-1/2">
-                <InterviewPreview preview={ hero } />
+                    <div className="flex items-center p-8 lg:p-24 justify-center lg:w-1/2">
+                        <InterviewPreview preview={ hero } />
+                    </div>
+                </div>
             </div>
         </section>
     );

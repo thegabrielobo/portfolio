@@ -39,6 +39,8 @@ const resources = {
         },
         projects: {
             check_it_out: '¡Míralo aquí!',
+            open_project: 'Abrir proyecto',
+            view_details: 'Ver detalles',
             engage360: {
                 title: 'Engage360',
                 description:
@@ -189,6 +191,8 @@ const resources = {
         },
         projects: {
             check_it_out: 'Check it out!',
+            open_project: 'Open project',
+            view_details: 'View details',
             engage360: {
                 title: 'Engage360',
                 description:
