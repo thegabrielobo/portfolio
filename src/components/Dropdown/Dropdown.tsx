@@ -27,9 +27,9 @@ const Dropdown = ({
   const [isOpen, setIsOpen] = useState(false);
 
   const dropdownContent = (forceOpen || isOpen) && (
-    <div className='origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5'>
+      <div className='origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-base-100 ring-1 ring-base-300 z-[60]'>
       <div
-        className={ `py-1 ${ withDivider ? 'divide-y divide-gray-100' : '' }` }
+              className={ `py-1 ${ withDivider ? 'divide-y divide-base-200' : '' }` }
         role='menu'
         aria-orientation='vertical'
         aria-labelledby='options-menu'
@@ -39,14 +39,14 @@ const Dropdown = ({
             key={ item.label }
             href={ item.link || '#' }
             className={ `${ item.icon ? 'flex items-center' : 'block'
-              } block px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white dark:hover:bg-gray-600` }
+                } block px-4 py-2 text-md text-base-content hover:bg-base-200 hover:text-base-content` }
             role='menuitem'
           >
             { item.icon }
             <span className='flex flex-col'>
               <span>{ item.label }</span>
               { item.desc && (
-                <span className='text-gray-400 text-xs'>{ item.desc }</span>
+                        <span className='text-base-content/60 text-xs'>{ item.desc }</span>
               ) }
             </span>
           </a>
@@ -62,9 +62,9 @@ const Dropdown = ({
           type='button'
           onClick={ () => setIsOpen(!isOpen) }
           className={ `${ withBackground
-            ? 'border border-gray-300 bg-white dark:bg-gray-800 shadow-sm'
+              ? 'border border-base-300 bg-base-100 shadow-sm'
             : ''
-            } flex items-center justify-center w-full rounded-md px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-50 hover:bg-gray-50 dark:hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500` }
+              } flex items-center justify-center w-full rounded-md px-4 py-2 text-sm font-medium text-base-content hover:bg-base-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-base-100 focus:ring-primary` }
           id='options-menu'
         >
           { label }

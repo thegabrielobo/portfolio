@@ -1,18 +1,35 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
+import LanguageDetector from 'i18next-browser-languagedetector';
 import resources from './labels/labels';
 
 i18n
-  .use(initReactI18next) // passes i18n down to react-i18next
+    .use(LanguageDetector) // Automatically detect user's language
+    .use(initReactI18next)
   .init({
     resources,
-    lng: 'en', // language to use, more information here: https://www.i18next.com/overview/configuration-options#languages-namespaces-resources
-    // you can use the i18n.changeLanguage function to change the language manually: https://www.i18next.com/overview/api#changelanguage
-    // if you're using a language detector, do not define the lng option
+      fallbackLng: 'en', // Fallback language
+      debug: false, // Disable debug mode to reduce console noise
 
+      // Language detection options
+      detection: {
+          order: ['localStorage', 'navigator', 'htmlTag'],
+          caches: ['localStorage'],
+      },
+
+      // Interpolation options
     interpolation: {
-      escapeValue: false, // react already safes from xss
+        escapeValue: false, // React already escapes values
     },
+
+      // Performance optimizations
+      react: {
+          useSuspense: false, // Better for SSR
+      },
+
+      // Namespace options
+      defaultNS: 'common',
+      ns: ['common', 'home', 'about_me', 'portfolio', 'projects', 'header', 'work_experience', 'interview'],
   });
 
 export default i18n;

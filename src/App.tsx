@@ -1,27 +1,20 @@
-import { useEffect } from 'react';
-import faviconLight from './assets/favicon.ico';
-import faviconDark from './assets/favicon_dark.ico';
+import { Suspense } from 'react';
+import { I18nextProvider } from 'react-i18next';
+
 import Routing from './Routing';
+import i18n from './i18n';
+import './App.css';
 
-export default function App () {
-
-    useEffect(() => {
-        const faviconLink = document.getElementById('favicon') as HTMLLinkElement || document.createElement('link');
-        faviconLink.rel = 'icon';
-        faviconLink.id = 'favicon';
-        document.head.appendChild(faviconLink);
-
-        const setFavicon = () => {
-            faviconLink.href = window.matchMedia('(prefers-color-scheme: dark)').matches ? faviconLight : faviconDark;
-        };
-
-        setFavicon();
-
-        const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-        mediaQuery.addEventListener('change', setFavicon);
-
-        return () => mediaQuery.removeEventListener('change', setFavicon);
-    }, []);
-
-    return <Routing />;
+function App () {
+    return (
+        <I18nextProvider i18n={ i18n }>
+            <div className="min-h-screen bg-base-100">
+                <Suspense fallback={ <div>Loading...</div> }>
+                    <Routing />
+                </Suspense>
+            </div>
+        </I18nextProvider>
+    );
 }
+
+export default App;

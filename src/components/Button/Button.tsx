@@ -6,6 +6,10 @@ type ButtonProps = {
     type?: 'button' | 'submit' | 'reset';
     isIconOnly?: boolean;
     isFloating?: boolean;
+    variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
+    size?: 'xs' | 'sm' | 'md' | 'lg';
+    className?: string;
+    style?: React.CSSProperties;
 };
 
 export const Button = ({
@@ -16,15 +20,24 @@ export const Button = ({
     type = 'button',
     isIconOnly = false,
     isFloating = false,
+    variant = 'primary',
+    size = 'md',
+    className = '',
+    style = {},
 }: ButtonProps) => {
+    const baseClasses = isFloating
+        ? 'fixed z-20 bottom-5 right-4 btn btn-circle btn-primary shadow-lg'
+        : `btn btn-${ variant } btn-${ size } mr-4 font-medium`;
+
     return (
         <button
-            className={ `${ isFloating ? 'fixed z-20 bottom-5 right-4 py-2 px-2' : 'flex items-center py-2 px-4 mr-4' } rounded-lg ${ bgColor } border-2 border-gray-300 text-gray-300 text-lg hover:transition hover:ease-in-out hover:delay-50 hover:border-white hover:bg-gradient-to-tr hover:from-glovooker-blue-100 hover:to-glovooker-green-100 hover:text-white font-circularmedium` }
+            className={ `${ baseClasses } ${ className }` }
             onClick={ onClick }
             type={ type }
+            style={ style }
         >
             { !isIconOnly && label }
-            { icon && <span className={ `${ isIconOnly && 'ml-2' }` }>{ icon }</span> }
+            { icon && <span className={ isIconOnly ? 'ml-2' : '' }>{ icon }</span> }
         </button>
     );
 };

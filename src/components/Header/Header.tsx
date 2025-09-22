@@ -1,25 +1,28 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 import { useTranslation } from 'react-i18next';
 import logo from '../../assets/img/logo.svg';
 
-import { Dropdown } from '../';
+import { Dropdown, ThemeSwitch } from '../';
 import { Link } from 'react-router-dom';
 import LanguageSwitch from '../LanguageSwitch/LanguageSwitch';
 
 interface Props {
+    withShadow?: boolean;
+    isFat?: boolean;
+    showScrollButton?: boolean;
     forceMenuOpenInMobile?: boolean;
     forceDDMOpenInMobile?: boolean;
     links?: HeaderLink[];
     ddmItems?: DDMItem[];
-    withShadow?: boolean;
     hideGitHubLink?: boolean;
     alignRight?: boolean;
     hideHelp?: boolean;
     withSearchBar?: boolean;
-    isFat?: boolean;
     withRequestLink?: boolean;
+    disableScrollEffect?: boolean;
 }
+
 interface HeaderLink {
     label: string;
     link?: string;
@@ -27,6 +30,7 @@ interface HeaderLink {
     desc?: string;
     icon?: JSX.Element;
 }
+
 interface DDMItem {
     icon?: JSX.Element;
     label: string;
@@ -34,27 +38,100 @@ interface DDMItem {
     link?: string;
 }
 
-export const Header = (props: Props) => {
+export const Header = ({
+    withShadow = false,
+    isFat = false,
+    showScrollButton = false,
+    forceMenuOpenInMobile = false,
+    forceDDMOpenInMobile = false,
+    links = [],
+    ddmItems = [],
+    hideGitHubLink = false,
+    disableScrollEffect = false
+}: Props) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [activeSection, setActiveSection] = useState('hero');
     const { t } = useTranslation('header');
+    const menuRef = useRef<HTMLDivElement>(null);
 
     const [navBackground, setNavBackground] = useState('bg-transparent');
+
     useEffect(() => {
+        // If scroll effect is disabled, set transparent background and don't set up scroll listener
+        if (disableScrollEffect) {
+            setNavBackground('bg-transparent');
+            return;
+        }
+
+        // Reset to transparent for home page
+        setNavBackground('bg-transparent');
+
+        let rafId: number;
+        let lastScrollY = window.scrollY;
+
         const handleScroll = () => {
-            const show = window.scrollY > 10;
-            if (show) {
-                setNavBackground(
-                    'transition ease-in-out delay-50 backdrop-blur-sm'
-                );
-            } else {
-                setNavBackground('transition ease-in-out delay-50 bg-transparent');
+            if (rafId) {
+                cancelAnimationFrame(rafId);
+            }
+
+            rafId = requestAnimationFrame(() => {
+                const currentScrollY = window.scrollY;
+                const show = currentScrollY > 10;
+
+                // Only update if scroll position changed significantly
+                if (Math.abs(currentScrollY - lastScrollY) > 5) {
+                    if (show) {
+                        setNavBackground('backdrop-blur-md bg-base-100/10');
+                    } else {
+                        setNavBackground('bg-transparent');
+                    }
+
+                    lastScrollY = currentScrollY;
+                }
+
+                // Detect active section based on scroll position
+                const sections = ['hero', 'about-me', 'portfolio'];
+                const headerHeight = 80;
+
+                for (let i = sections.length - 1; i >= 0; i--) {
+                    const section = sections[i];
+                    const element = document.getElementById(section);
+                    if (element) {
+                        const rect = element.getBoundingClientRect();
+                        if (rect.top <= headerHeight + 100) {
+                            setActiveSection(section);
+                            break;
+                        }
+                    }
+                }
+            });
+        };
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            if (rafId) {
+                cancelAnimationFrame(rafId);
             }
         };
-        document.addEventListener('scroll', handleScroll);
-        return () => {
-            document.removeEventListener('scroll', handleScroll);
+    }, [disableScrollEffect]);
+
+    // Close menu when clicking outside
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+                setIsMenuOpen(false);
+            }
         };
-    }, []);
+
+        if (isMenuOpen) {
+            document.addEventListener('mousedown', handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [isMenuOpen]);
 
     const languages: DDMItem[] = [
         {
@@ -65,158 +142,145 @@ export const Header = (props: Props) => {
         },
     ];
 
+    const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+        e.preventDefault();
+
+        // Handle smooth scrolling for anchor links
+        if (href.startsWith('#')) {
+            const targetId = href.substring(1);
+            const targetElement = document.getElementById(targetId);
+
+            if (targetElement) {
+                const headerHeight = 80; // Approximate header height
+                const targetPosition = targetElement.offsetTop - headerHeight;
+
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        } else {
+            // Handle external links
+            window.location.href = href;
+        }
+    };
+
     return (
-        <div className='fixed z-40 w-screen'>
-            <nav
-                className={ `${ navBackground } ${ props.withShadow ? ' shadow' : '' }${ props.isFat ? ' py-4' : ''
-                    } ` }
-            >
-                <div className='max-w-7xl mx-auto px-8'>
-                    <div className='flex items-center justify-between h-16'>
-                        <div
-                            className={ `${ props.alignRight ? 'w-full justify-between' : ''
-                                } flex items-center` }
-                        >
-                            <Link
-                                className='flex-shrink-0'
-                                to={ '.' }
-                            >
-                                <img
-                                    className='h-12 w-12'
-                                    src={ logo }
-                                    alt={ `${ t('logo_alt') }` }
-                                />
-                            </Link>
-                            <div className='hidden'>
-                                <div className='ml-10 flex items-baseline space-x-4'>
-                                    { props.links?.map((link) => {
-                                        return (
-                                            <Link
-                                                key={ link.label }
-                                                to={ link.link || '/' }
-                                                className={ `${ link.isSelected ? 'text-white' : 'text-gray-300'
-                                                    }  hover:text-white px-3 py-2 rounded-md ${ props.isFat ? 'text-lg' : 'text-md'
-                                                    } font-medium` }
-                                            >
-                                                { link.label }
-                                            </Link>
-                                        );
-                                    }) }
-                                </div>
-                            </div>
-                        </div>
-                        <div className='block'>
-                            <div className='ml-4 flex items-center md:ml-6'>
-                                { !props.hideGitHubLink && (
-                                    <a
-                                        href='https://github.com/Charlie85270/tail-kit'
-                                        className='p-1 rounded-full text-gray-400 focus:outline-none hover:text-gray-200 focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white'
-                                    >
-                                        <span className='sr-only'>View github</span>
-                                        <svg
-                                            xmlns='http://www.w3.org/2000/svg'
-                                            width='30'
-                                            height='30'
-                                            fill='currentColor'
-                                            className='text-xl hover:text-gray-800 dark:hover:text-white transition-colors duration-200'
-                                            viewBox='0 0 1792 1792'
-                                        >
-                                            <path d='M896 128q209 0 385.5 103t279.5 279.5 103 385.5q0 251-146.5 451.5t-378.5 277.5q-27 5-40-7t-13-30q0-3 .5-76.5t.5-134.5q0-97-52-142 57-6 102.5-18t94-39 81-66.5 53-105 20.5-150.5q0-119-79-206 37-91-8-204-28-9-81 11t-92 44l-38 24q-93-26-192-26t-192 26q-16-11-42.5-27t-83.5-38.5-85-13.5q-45 113-8 204-79 87-79 206 0 85 20.5 150t52.5 105 80.5 67 94 39 102.5 18q-39 36-49 103-21 10-45 15t-57 5-65.5-21.5-55.5-62.5q-19-32-48.5-52t-49.5-24l-20-3q-21 0-29 4.5t-5 11.5 9 14 13 12l7 5q22 10 43.5 38t31.5 51l10 23q13 38 44 61.5t67 30 69.5 7 55.5-3.5l23-4q0 38 .5 88.5t.5 54.5q0 18-13 30t-40 7q-232-77-378.5-277.5t-146.5-451.5q0-209 103-385.5t279.5-279.5 385.5-103zm-477 1103q3-7-7-12-10-3-13 2-3 7 7 12 9 6 13-2zm31 34q7-5-2-16-10-9-16-3-7 5 2 16 10 10 16 3zm30 45q9-7 0-19-8-13-17-6-9 5 0 18t17 7zm42 42q8-8-4-19-12-12-20-3-9 8 4 19 12 12 20 3zm57 25q3-11-13-16-15-4-19 7t13 15q15 6 19-6zm63 5q0-13-17-11-16 0-16 11 0 13 17 11 16 0 16-11zm58-10q-2-11-18-9-16 3-14 15t18 8 14-14z' />
-                                        </svg>
-                                    </a>
-                                ) }
-                                { props.ddmItems && (
-                                    <div className='ml-6 relative'>
-                                        <Dropdown
-                                            icon={
-                                                <svg
-                                                    width='20'
-                                                    fill='currentColor'
-                                                    height='20'
-                                                    className='text-gray-800'
-                                                    viewBox='0 0 1792 1792'
-                                                    xmlns='http://www.w3.org/2000/svg'
-                                                >
-                                                    <path d='M1523 1339q-22-155-87.5-257.5t-184.5-118.5q-67 74-159.5 115.5t-195.5 41.5-195.5-41.5-159.5-115.5q-119 16-184.5 118.5t-87.5 257.5q106 150 271 237.5t356 87.5 356-87.5 271-237.5zm-243-699q0-159-112.5-271.5t-271.5-112.5-271.5 112.5-112.5 271.5 112.5 271.5 271.5 112.5 271.5-112.5 112.5-271.5zm512 256q0 182-71 347.5t-190.5 286-285.5 191.5-349 71q-182 0-348-71t-286-191-191-286-71-348 71-348 191-286 286-191 348-71 348 71 286 191 191 286 71 348z' />
-                                                </svg>
-                                            }
-                                            withBackground={ false }
-                                            forceOpen={ props.forceDDMOpenInMobile }
-                                            items={ props.ddmItems.map((item) => {
-                                                return { label: item.label };
-                                            }) }
-                                        />
-                                    </div>
-                                ) }
-                            </div>
-                        </div>
+        <div className={ `navbar fixed top-0 z-50 transition-all duration-300 ease-in-out ${ navBackground === 'bg-transparent' ? 'bg-transparent' : 'backdrop-blur-md bg-base-100/10' } ${ withShadow ? 'shadow-lg' : '' } ${ isFat ? 'py-4' : '' }` }>
+            {/* Logo positioned absolutely */ }
+            <div className="absolute left-4 lg:left-8 top-4 mix-blend-difference">
+                <Link className="text-xl text-base-content hover:opacity-80 transition-opacity duration-200" to=".">
+                    <svg width="48" height="48" viewBox="0 0 2000 2000" fill="none" xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 lg:h-12 lg:w-12">
+                        <g clipPath="url(#clip0_62_54)">
+                            <path d="M2000 1000C2000 1197.78 1941.35 1391.12 1831.47 1555.57C1721.59 1720.02 1565.41 1848.19 1382.68 1923.88C1199.96 1999.57 998.891 2019.37 804.91 1980.79C610.929 1942.2 432.746 1846.96 292.893 1707.11C153.041 1567.25 57.7999 1389.07 19.2147 1195.09C-19.3705 1001.11 0.432836 800.043 76.1205 617.317C151.808 434.59 279.981 278.412 444.43 168.53C608.879 58.649 802.219 -2.35852e-06 1000 0V500C901.109 500 804.439 529.324 722.215 584.265C639.99 639.206 575.904 717.295 538.06 808.658C500.216 900.021 490.315 1000.55 509.607 1097.55C528.9 1194.54 576.52 1283.63 646.447 1353.55C716.373 1423.48 805.464 1471.1 902.455 1490.39C999.445 1509.69 1099.98 1499.78 1191.34 1461.94C1282.7 1424.1 1360.79 1360.01 1415.73 1277.79C1470.68 1195.56 1500 1098.89 1500 1000H2000Z" fill="currentColor" />
+                            <path d="M1090.4 0.00012207H1587.57V435.028H2000V909.604H1090.4V0.00012207Z" fill="currentColor" />
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_62_54">
+                                <rect width="2000" height="2000" fill="white" />
+                            </clipPath>
+                        </defs>
+                    </svg>
+                </Link>
+            </div>
 
-                        <div className='hidden md:block'>
-                            <LanguageSwitch items={ languages } />
-                        </div>
-
-                        <div className='-mr-2 flex md:hidden'>
-                            <button
-                                onClick={ () => setIsMenuOpen(!isMenuOpen) }
-                                className={ `text-white hover:text-gray-300 inline-flex items-center justify-center p-2 rounded-md focus:outline-none` }
-                            >
-                                <svg
-                                    width='20'
-                                    height='20'
-                                    fill='currentColor'
-                                    className='h-8 w-8'
-                                    viewBox='0 0 1792 1792'
-                                    xmlns='http://www.w3.org/2000/svg'
+            <div className='navbar-start'>
+                {/* Empty navbar-start to push content to center and end */ }
+            </div>
+            <div className='navbar-center hidden lg:flex'>
+                <ul className={ `menu menu-horizontal gap-12 transition-opacity duration-300 ${ navBackground === 'bg-transparent' ? 'opacity-0' : 'opacity-100' }` }>
+                    { links?.map((link) => {
+                        const isActive = activeSection === link.link?.substring(1);
+                        return (
+                            <li key={ link.label }>
+                                <a
+                                    href={ link.link || '/' }
+                                    onClick={ (e) => handleLinkClick(e, link.link || '/') }
+                                    className={ `px-4 py-2 rounded-md transition-all duration-300 font-medium ${ isActive
+                                        ? 'bg-primary text-primary-content shadow-lg'
+                                        : 'hover:bg-base-200/50 hover:scale-105'
+                                        }` }
                                 >
-                                    <path d='M1664 1344v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45zm0-512v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45zm0-512v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45z' />
-                                </svg>
-                            </button>
+                                    { link.label }
+                                </a>
+                            </li>
+                        );
+                    }) }
+                </ul>
+            </div>
+            <div className='navbar-end'>
+                {/* Mobile hamburger menu */ }
+                <div className='relative lg:hidden' ref={ menuRef }>
+                    <button
+                        className="btn btn-ghost btn-circle"
+                        onClick={ () => {
+                            console.log('Hamburger clicked, current state:', isMenuOpen);
+                            setIsMenuOpen(!isMenuOpen);
+                        } }
+                        aria-label="Toggle menu"
+                    >
+                        <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
+                        </svg>
+                    </button>
+                    { (isMenuOpen || forceMenuOpenInMobile) && (
+                        <div className="absolute right-0 top-full mt-2 w-48 bg-base-100 rounded-lg shadow-lg border border-base-300 z-[9999]">
+                            <ul className="menu menu-sm p-2">
+                                { links?.map((link) => (
+                                    <li key={ link.label }>
+                                        <a
+                                            href={ link.link || '/' }
+                                            onClick={ (e) => {
+                                                handleLinkClick(e, link.link || '/');
+                                                setIsMenuOpen(false);
+                                            } }
+                                            className={ link.isSelected ? 'active' : '' }
+                                        >
+                                            { link.label }
+                                        </a>
+                                    </li>
+                                )) }
+                                <li className="lg:hidden">
+                                    <div className="flex items-center justify-between w-full">
+                                        <span>{ t('theme') }</span>
+                                        <ThemeSwitch />
+                                    </div>
+                                </li>
+                                <li className="lg:hidden">
+                                    <div className="flex items-center justify-between w-full">
+                                        <span>{ t('language') }</span>
+                                        <LanguageSwitch items={ languages } />
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
-                    </div>
+                    ) }
                 </div>
 
-                { (isMenuOpen || props.forceMenuOpenInMobile) && (
-                    <div className='fixed top-0 py-24 z-50 h-screen w-screen bg-glovooker-chamoisee-100 md:hidden'>
-                        <div className='top-6 right-6 fixed md:hidden'>
-                            <button
-                                onClick={ () => setIsMenuOpen(!isMenuOpen) }
-                                className={ `text-gray-800 dark:text-white hover:text-gray-300 inline-flex items-center justify-center p-2 rounded-md focus:outline-none` }
-                            >
-                                <svg
-                                    width='20'
-                                    height='20'
-                                    fill='currentColor'
-                                    className='h-8 w-8'
-                                    viewBox='0 0 1792 1792'
-                                    xmlns='http://www.w3.org/2000/svg'
-                                >
-                                    <path d='M1664 1344v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45zm0-512v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45zm0-512v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45z' />
-                                </svg>
-                            </button>
-                        </div>
-                        <div className='px-2 pt-2 pb-3 space-y-1 sm:px-3'>
-                            { props.links?.map((link) => {
-                                return (
-                                    <a
-                                        key={ link.label }
-                                        href={ link.link || '/' }
-                                        onClick={ () => setIsMenuOpen(false) }
-                                        className={ `${ link.isSelected
-                                            ? 'bold'
-                                            : 'font-medium hover:font-bold'
-                                            } text-white block px-3 py-2 rounded-md text-xl` }
-                                    >
-                                        { link.label }
-                                    </a>
-                                );
-                            }) }
-                        </div>
-                    </div>
+                { !hideGitHubLink && (
+                    <a
+                        href='https://github.com/Charlie85270/tail-kit'
+                        className='btn btn-ghost btn-circle'
+                    >
+                        <span className='sr-only'>View github</span>
+                        <svg
+                            xmlns='http://www.w3.org/2000/svg'
+                            width='24'
+                            height='24'
+                            fill='currentColor'
+                            viewBox='0 0 1792 1792'
+                        >
+                            <path d='M896 128q209 0 385.5 103t279.5 279.5 103 385.5q0 251-146.5 451.5t-378.5 277.5q-27 5-40-7t-13-30q0-3 .5-76.5t.5-134.5q0-97-52-142 57-6 102.5-18t94-39 81-66.5 53-105 20.5-150.5q0-119-79-206 37-91-8-204-28-9-81 11t-92 44l-38 24q-93-26-192-26t-192 26q-16-11-42.5-27t-83.5-38.5-85-13.5q-45 113-8 204-79 87-79 206 0 85 20.5 150t52.5 105 80.5 67 94 39 102.5 18q-39 36-49 103-21 10-45 15t-57 5-65.5-21.5-55.5-62.5q-19-32-48.5-52t-49.5-24l-20-3q-21 0-29 4.5t-5 11.5 9 14 13 12l7 5q22 10 43.5 38t31.5 51l10 23q13 38 44 61.5t67 30 69.5 7 55.5-3.5l23-4q0 38 .5 88.5t.5 54.5q0 18-13 30t-40 7q-232-77-378.5-277.5t-146.5-451.5q0-209 103-385.5t279.5-279.5 385.5-103zm-477 1103q3-7-7-12-10-3-13 2-3 7 7 12 9 6 13-2zm31 34q7-5-2-16-10-9-16-3-7 5 2 16 10 10 16 3zm30 45q9-7 0-19-8-13-17-6-9 5 0 18t17 7zm42 42q8-8-4-19-12-12-20-3-9 8 4 19 12 12 20 3zm57 25q3-11-13-16-15-4-19 7t13 15q15 6 19-6zm63 5q0-13-17-11-16 0-16 11 0 13 17 11 16 0 16-11zm58-10q-2-11-18-9-16 3-14 15t18 8 14-14z' />
+                        </svg>
+                    </a>
                 ) }
-            </nav>
+                <div className='hidden lg:block ml-2 mix-blend-difference'>
+                    <ThemeSwitch />
+                    <LanguageSwitch items={ languages } />
+                </div>
+            </div>
         </div>
     );
 };
-
 
 export type { DDMItem, HeaderLink };

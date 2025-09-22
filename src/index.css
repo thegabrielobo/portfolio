@@ -1,78 +1,30 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 body {
     margin: 0;
-    font-family: 'CircularStd', sans-serif;
+    font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
-@font-face {
-    font-family: 'CircularStdBlack';
-    src: url('assets/fonts/CircularStd/CircularStd-Black.ttf') format('truetype');
-    font-weight: 900;
-    font-style: normal;
-    font-display: swap;
-    font-feature-settings: 'ss01' on;
+/* Theme switch active state */
+.btn-active {
+    background-color: hsl(var(--bc) / 0.2);
+    color: hsl(var(--bc));
 }
 
-@font-face {
-    font-family: 'CircularStdBlack';
-    src: url('assets/fonts/CircularStd/CircularStd-BlackItalic.ttf') format('truetype');
-    font-weight: 900;
-    font-style: italic;
-    font-display: swap;
-    font-feature-settings: 'ss01' on;
+/* IBM Plex utility classes */
+.font-ibm {
+    font-family: 'IBM Plex Sans', sans-serif;
 }
 
-@font-face {
-    font-family: 'CircularStdBold';
-    src: url('assets/fonts/CircularStd/CircularStd-Bold.ttf') format('truetype');
-    font-weight: bold;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'CircularStdBold';
-    src: url('assets/fonts/CircularStd/CircularStd-BoldItalic.ttf') format('truetype');
-    font-weight: bold;
-    font-style: italic;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'CircularStd';
-    src: url('assets/fonts/CircularStd/CircularStd-Book.ttf') format('truetype');
+/* Special styling for IBM-related content */
+.ibm-brand {
+    font-family: 'IBM Plex Sans', sans-serif;
     font-weight: 500;
-    font-style: normal;
-    font-display: swap;
+    color: #0062ff; /* IBM Blue */
 }
 
-@font-face {
-    font-family: 'CircularStd';
-    src: url('assets/fonts/CircularStd/CircularStd-BookItalic.ttf') format('truetype');
-    font-weight: 500;
-    font-style: italic;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'CircularStdMedium';
-    src: url('assets/fonts/CircularStd/CircularStd-Medium.ttf') format('truetype');
-    font-weight: 500;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'CircularStdMedium';
-    src: url('assets/fonts/CircularStd/CircularStd-MediumItalic.ttf') format('truetype');
-    font-weight: 500;
-    font-style: italic;
-    font-display: swap;
+.ibm-brand:hover {
+    color: #0043ce; /* Darker IBM Blue on hover */
 }
 
 @layer utilities {
@@ -83,15 +35,16 @@ body {
 
     .scrollbar::-webkit-scrollbar-track {
         padding-right: 5px;
-        background: #11123f;
+        background: hsl(var(--b2));
     }
 
     .scrollbar::-webkit-scrollbar-thumb {
-        background: #18195a;
+        background: hsl(var(--bc) / 0.3);
+        border-radius: 3px;
     }
 
     .scrollbar::-webkit-scrollbar-thumb:hover {
-        background: #11123f;
+        background: hsl(var(--bc) / 0.5);
     }
 
     .scrollbar-tag::-webkit-scrollbar {
@@ -105,11 +58,20 @@ body {
     }
 
     .scrollbar-tag::-webkit-scrollbar-thumb {
-        background: rgb(221, 221, 221);
+        background: hsl(var(--bc) / 0.3);
         border-radius: 100vh;
     }
 
     .scrollbar-tag::-webkit-scrollbar-thumb:hover {
-        background: rgb(221, 221, 221);
+        background: hsl(var(--bc) / 0.5);
+    }
+
+    /* Timeline logo styling */
+    .timeline-logo {
+        filter: none; /* Light mode: no filter, show original colors */
+    }
+
+    [data-theme="dark"] .timeline-logo {
+        filter: brightness(0) invert(1); /* Dark mode: white logos */
     }
 }

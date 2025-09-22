@@ -1,9 +1,14 @@
-export * from './Avatars/Avatars';
 export * from './Button/Button';
 export * from './Dropdown/Dropdown';
 export * from './IconButton/IconButton';
 export * from './LanguageSwitch/LanguageSwitch';
 export * from './Modal/Modal';
 export * from './ProjectCard/ProjectCard';
-export * from './TitleLoop/TitleLoop';
 export * from './InterviewPreview/InterviewPreview';
+export * from './ThemeSwitch/ThemeSwitch';
+export { default as TiltedCard } from './TiltedCard/TiltedCard';
+export { default as ProjectTiltedCard } from './ProjectTiltedCard/ProjectTiltedCard';
+export { default as ProjectDetails } from './ProjectDetails/ProjectDetails';
+export { default as ChromaGrid } from './ChromaGrid/ChromaGrid';
+export { default as Timeline } from './Timeline/Timeline';
+export { default as StarBorder } from './StarBorder/StarBorder';
