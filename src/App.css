@@ -1,0 +1,104 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+/* Light Theme (Default) */
+:root {
+  /* Base colors */
+  --color-base-100: #ffffff;
+  --color-base-200: #f1f5f9;
+  --color-base-300: #e2e8f0;
+  --color-base-content: #000000;
+
+  /* Primary colors */
+  --color-primary: #000000;
+  --color-primary-content: #ffffff;
+
+  /* Secondary colors */
+  --color-secondary: #64748b;
+  --color-secondary-content: #ffffff;
+
+  /* Accent colors */
+  --color-accent: #f59e0b;
+  --color-accent-content: #ffffff;
+
+  /* Neutral colors */
+  --color-neutral: #f8fafc;
+  --color-neutral-content: #1e293b;
+
+  /* Status colors */
+  --color-info: #0ea5e9;
+  --color-info-content: #ffffff;
+  --color-success: #10b981;
+  --color-success-content: #ffffff;
+  --color-warning: #f59e0b;
+  --color-warning-content: #ffffff;
+  --color-error: #ef4444;
+  --color-error-content: #ffffff;
+
+  /* Border radius */
+  --radius-selector: 0.5rem;
+  --radius-field: 0.375rem;
+  --radius-box: 0.5rem;
+
+  /* Base sizes */
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+
+  /* Border size */
+  --border: 1px;
+
+  /* Effects */
+  --depth: 1;
+  --noise: 0;
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+  /* Base colors */
+  --color-base-100: #000000;
+  --color-base-200: #1e293b;
+  --color-base-300: #334155;
+  --color-base-content: #f8fafc;
+
+  /* Primary colors */
+  --color-primary: #ffffff;
+  --color-primary-content: #000000;
+
+  /* Secondary colors */
+  --color-secondary: #94a3b8;
+  --color-secondary-content: #1e293b;
+
+  /* Accent colors */
+  --color-accent: #fbbf24;
+  --color-accent-content: #1e293b;
+
+  /* Neutral colors */
+  --color-neutral: #1e293b;
+  --color-neutral-content: #f8fafc;
+
+  /* Status colors */
+  --color-info: #38bdf8;
+  --color-info-content: #ffffff;
+  --color-success: #34d399;
+  --color-success-content: #ffffff;
+  --color-warning: #fbbf24;
+  --color-warning-content: #ffffff;
+  --color-error: #f87171;
+  --color-error-content: #ffffff;
+
+  /* Border radius */
+  --radius-selector: 0.5rem;
+  --radius-field: 0.375rem;
+  --radius-box: 0.5rem;
+
+  /* Base sizes */
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+
+  /* Border size */
+  --border: 1px;
+
+  /* Effects */
+  --depth: 1;
+  --noise: 0;
+}

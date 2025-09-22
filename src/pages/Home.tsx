@@ -5,8 +5,7 @@ import { withBasicLayout } from '../layout/basicLayout';
 import AboutMe from '../sections/AboutMe';
 import Hero from '../sections/Hero';
 import Portfolio from '../sections/Portfolio';
-import Carousel from '../sections/Carousel';
-import Contact from '../sections/Contact';
+import WorkExperience from '../sections/WorkExperience';
 import { Button } from '../components';
 
 export type SectionsReferences = {
@@ -23,7 +22,6 @@ export const Home = () => {
     const heroRef = useRef<HTMLElement>(null);
     const aboutMeRef = useRef<HTMLElement>(null);
     const portfolioRef = useRef<HTMLElement>(null);
-    const contactRef = useRef<HTMLElement>(null);
 
     const headerHeight = 96;
 
@@ -58,32 +56,33 @@ export const Home = () => {
                 });
             },
         },
-        contactRef: {
-            ref: contactRef,
-            scrollTo: () => {
-                const offset = (contactRef.current?.getBoundingClientRect().top ?? 0) - headerHeight;
-                window.scrollTo({
-                    top: offset,
-                    behavior: 'smooth',
-                });
-            },
-        },
     };
 
     useEffect(() => {
-        const checkScrollPosition = () => {
-            if (window.scrollY > 90) {
-                setShowButton(true);
-            } else {
-                setShowButton(false);
-            }
-        };
+        // Use intersection observer to show button when Portfolio section is visible
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        setShowButton(true);
+                    } else {
+                        setShowButton(false);
+                    }
+                });
+            },
+            { threshold: 0.1 } // Show when 10% of the section is visible
+        );
 
-        window.addEventListener('scroll', checkScrollPosition);
+        // Observe the Portfolio section
+        const portfolioElement = portfolioRef.current;
+        if (portfolioElement) {
+            observer.observe(portfolioElement);
+        }
 
-        // Clean up the event listener when the component is unmounted
         return () => {
-            window.removeEventListener('scroll', checkScrollPosition);
+            if (portfolioElement) {
+                observer.unobserve(portfolioElement);
+            }
         };
     }, []);
 
@@ -93,7 +92,6 @@ export const Home = () => {
                 reference={ heroRef }
                 sectionsRef={ sectionsRef }
             />
-            <Carousel />
             <AboutMe
                 title={ 'title' }
                 description={ ['description_1', 'description_2', 'description_3'] }
@@ -101,9 +99,10 @@ export const Home = () => {
                 sectionsRef={ sectionsRef }
                 isLeft={ true }
             />
+            <WorkExperience />
             <Portfolio reference={ portfolioRef } />
-            <Contact reference={ contactRef } sectionsRef={ sectionsRef } />
 
+            {/* Floating scroll-to-top button - appears when About Me is visible */ }
             { showButton && (
                 <Button
                     isFloating={ true }

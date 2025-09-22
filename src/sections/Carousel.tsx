@@ -50,8 +50,8 @@ const Carousel: FC = () => {
 
 
     return (
-        <section className='bg-white w-full'>
-            <div className='container mx-auto py-8 text-center'>
+        <section className='bg-base-100 w-full'>
+            <div className='container mx-auto max-w-8xl px-4 py-8 text-center'>
                 <Slider { ...settings }>
                     { logos.map((logo, index) => (
                         <div key={ index } className="px-2 flex justify-center items-center h-full">

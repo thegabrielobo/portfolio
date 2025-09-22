@@ -4,21 +4,30 @@ type IconButtonProps = {
   textColor?: string;
   icon?: JSX.Element;
   className?: string;
+    variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
+    size?: 'xs' | 'sm' | 'md' | 'lg';
+    title?: string;
 };
 
 export const IconButton = ({
   onClick,
-  bgColor = 'bg-glovooker-green-100',
-  textColor = 'text-white',
+    bgColor,
+    textColor,
   icon,
   className,
+    variant = 'ghost',
+    size = 'md',
+    title,
 }: IconButtonProps) => {
+    const baseClasses = `btn btn-${ variant } btn-${ size } btn-circle ${ className || '' }`;
+
   return (
     <button
-      className={ `flex items-center py-2 px-4 rounded-lg ${ bgColor } border-2 border-transparent text-3xl font-circularmedium mr-4 ${ textColor } ${ className }` }
-      onClick={ onClick }
+          className={ baseClasses }
+          onClick={ onClick }
+          title={ title }
     >
-      { icon }
+          { icon }
     </button>
   );
 };

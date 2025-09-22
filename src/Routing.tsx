@@ -13,6 +13,10 @@ export const pages: Pages = {
     component: React.lazy(() => import('./pages/Home')),
     path: '/',
   },
+    project: {
+        component: React.lazy(() => import('./pages/Project')),
+        path: '/project/:projectIndex',
+    },
 };
 
 const Routing = () => {
